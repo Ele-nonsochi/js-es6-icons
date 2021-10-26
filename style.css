@@ -32,7 +32,7 @@ nav, main {
 .box-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .card-img{
@@ -51,3 +51,4 @@ nav, main {
     flex-direction: column;
     justify-content: center;
 }
+
