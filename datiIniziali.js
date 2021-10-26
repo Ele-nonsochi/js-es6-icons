@@ -1,4 +1,4 @@
-[
+const iconArray = [
 	{
 		name: 'cat',
 		prefix: 'fa-',
@@ -103,4 +103,57 @@ Coloriamo le icone per tipo
 Creiamo una select con i tipi di icone e usiamola per filtrare le icone
  */
 
-//Stampo in pagina le icone
+//Stampo in pagina le card e do il colore
+
+const boxContainer = document.querySelector('.box-container');
+console.log(boxContainer)
+
+const typeColor = {
+	"user": "#800080",
+	"animal": "blue",
+	"vegetable": "#ffa500",
+}
+
+for (let i = 0; i < iconArray.length; i++) {
+	const { name, prefix, family, type } = iconArray[i]
+
+	boxContainer.innerHTML += `<div class="card-container">
+	                            <div class="card-img">
+	                            <i style="color:${typeColor[type]}" class="${family} ${prefix}${name}"></i>
+	                            </div>
+	                            <div class="card-name">
+	                         	<div class="card-title text-center">${name}</div>
+                             	</div>
+                                </div>`
+	console.log(boxContainer)
+}
+
+
+//Scelto la categoria e mostro le icone
+
+const cardContainer = document.querySelector(".card-container");
+const cardSelect = document.querySelector(".form-select");
+console.log(cardSelect)
+console.log(cardContainer)
+
+const arrayAnimal = []
+const arrayVegetable = []
+const arrayUser = []
+
+//cardContainer(iconArray)
+cardSelect.addEventListener("change", function () {
+
+	if (cardSelect.value === "all") {
+		typeColor(iconArray)
+	}
+	if (cardSelect.value === "animal") {
+		stampScreen(arrayAnimal)
+	}
+	if (cardSelect.value === "vegetable") {
+		stampScreen(arrayVegetable)
+	}
+	if (cardSelect.value === "user") {
+		stampScreen(arrayUser)
+	}
+
+});
