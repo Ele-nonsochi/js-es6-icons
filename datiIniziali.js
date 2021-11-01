@@ -107,32 +107,8 @@ Creiamo una select con i tipi di icone e usiamola per filtrare le icone
 
 const boxContainer = document.querySelector('.box-container');
 console.log(boxContainer)
-
-const typeColor = {
-	"user": "#800080",
-	"animal": "blue",
-	"vegetable": "#ffa500",
-}
-
-for (let i = 0; i < iconArray.length; i++) {
-	const { name, prefix, family, type } = iconArray[i]
-
-	boxContainer.innerHTML += `<div class="card-container">
-	                            <div class="card-img">
-	                            <i style="color:${typeColor[type]}" class="${family} ${prefix}${name}"></i>
-	                            </div>
-	                            <div class="card-name">
-	                         	<div class="card-title text-center">${name}</div>
-                             	</div>
-                                </div>`
-	console.log(boxContainer)
-}
-
-
-//Scelto la categoria e mostro le icone
-
 const cardContainer = document.querySelector(".card-container");
-const cardSelect = document.querySelector(".form-select");
+const cardSelect = document.getElementById("form-select").value;
 console.log(cardSelect)
 console.log(cardContainer)
 
@@ -140,20 +116,61 @@ const arrayAnimal = []
 const arrayVegetable = []
 const arrayUser = []
 
+const typeColor = {
+	"user": "#800080",
+	"animal": "blue",
+	"vegetable": "#ffa500",
+}
+
+function stampInHTML(array) {
+	boxContainer.innerHTML = ""
+	for (let i = 0; i < iconArray.length; i++) {
+		const { name, prefix, family, type } = iconArray[i]
+
+		boxContainer.innerHTML += `<div class="card-container">
+	                            <div class="card-img">
+	                            <i style="color:${typeColor[type]}" class="${family} ${prefix}${name}"></i>
+	                            </div>
+	                            <div class="card-name">
+	                         	<div class="card-title text-center">${name}</div>
+                             	</div>
+                                </div>`
+		console.log(boxContainer)
+	}
+}
+
+
+//Scelto la categoria e mostro le icone
+
+for (let i = 0; i < iconArray.length; i++) {
+	const { type } = iconArray[i];
+	if (type === "animal") {
+		arrayAnimal.push(iconArray[i])
+	}
+	if (type === "vegetable") {
+		arrayVegetable.push(iconArray[i])
+	}
+	if (type === "user") {
+		arrayUser.push(iconArray[i])
+	}
+}
+
 //cardContainer(iconArray)
-cardSelect.addEventListener("change", function () {
 
-	if (cardSelect.value === "all") {
-		typeColor(iconArray)
+stampInHTML(iconArray)
+select.addEventListener("change", function () {
+
+	if (select.value === "all") {
+		stampInHTML(iconArray)
 	}
-	if (cardSelect.value === "animal") {
-		stampScreen(arrayAnimal)
+	if (select.value === "animal") {
+		stampInHTML(arrayAnimal)
 	}
-	if (cardSelect.value === "vegetable") {
-		stampScreen(arrayVegetable)
+	if (select.value === "vegetable") {
+		stampInHTML(arrayVegetable)
 	}
-	if (cardSelect.value === "user") {
-		stampScreen(arrayUser)
+	if (select.value === "user") {
+		stampInHTML(arrayUser)
 	}
 
-});
+})
